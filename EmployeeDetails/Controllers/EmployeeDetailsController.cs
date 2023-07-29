@@ -54,5 +54,6 @@ namespace EmployeeDetails.Controllers
         {
             obj.DeleteEmployeeDetails(id);
         }
+
     }
 }
