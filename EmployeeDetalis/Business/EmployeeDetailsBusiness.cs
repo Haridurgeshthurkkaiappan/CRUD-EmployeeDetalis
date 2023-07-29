@@ -22,7 +22,7 @@ namespace EmployeeDetalis.Business
             connectionString = @"Data source=DESKTOP-UCPA9BN;Initial catalog=EmployeeDetails;User Id=sa;Password=Anaiyaan@123";
         }
 
-        public void InsertSP(EmployeeDetailsModel emp)
+        public void InsertEmployeeDetails(EmployeeDetailsModel emp)
         {
            
             try
@@ -38,17 +38,17 @@ namespace EmployeeDetalis.Business
                 con.Close();
 
             }
-            catch (SqlException ep)
+            catch (SqlException ex)
             {
-                throw;
+                throw ;
             }
-            catch (Exception ex)
+            catch (Exception e)
             {
-                throw ex;
+                throw e;
             }
 
         }
-        public List<EmployeeDetailsModel> Read()
+        public List<EmployeeDetailsModel> ReadEmployeeDetails(int id)
         {
             try
             {
@@ -56,14 +56,14 @@ namespace EmployeeDetalis.Business
 
                 var connection = new SqlConnection(connectionString);
                 connection.Open();
-                constrain = connection.Query<EmployeeDetailsModel>("exec listEmployeeDetails").ToList();
+                constrain = connection.Query<EmployeeDetailsModel>($" exec listEmployeeDetails {id} ").ToList();
                 connection.Close();
-                foreach (var cons in constrain)
-                {
+                //foreach (var cons in constrain)
+                //{
 
 
-                    Console.WriteLine($"ID-->{cons.ID}\tName-->{cons.Name}\tAddress-->{cons.address}\tAGE-->{cons.age}\tPHONENUMBER-->{cons.phonenumber}\tDOB-->{cons.DOB}");
-                }
+                //    Console.WriteLine($"ID-->{cons.ID}\tName-->{cons.Name}\tAddress-->{cons.address}\tAGE-->{cons.age}\tPHONENUMBER-->{cons.phonenumber}\tDOB-->{cons.DOB}");
+                //}
 
                 return constrain;
 
@@ -78,6 +78,85 @@ namespace EmployeeDetalis.Business
             {
                 throw r;
             }
+        }
+
+        public List<EmployeeDetailsModel> ReadEmployeeDetails()
+        {
+            try
+            {
+                List<EmployeeDetailsModel> constrain = new List<EmployeeDetailsModel>();
+
+                var connection = new SqlConnection(connectionString);
+                connection.Open();
+                constrain = connection.Query<EmployeeDetailsModel>(" select * from EmployeeDetails ").ToList();
+                connection.Close();
+                //foreach (var cons in constrain)
+                //{
+
+
+                //    Console.WriteLine($"ID-->{cons.ID}\tName-->{cons.Name}\tAddress-->{cons.address}\tAGE-->{cons.age}\tPHONENUMBER-->{cons.phonenumber}\tDOB-->{cons.DOB}");
+                //}
+
+                return constrain;
+
+
+            }
+
+            catch (SqlException er)
+            {
+                throw;
+            }
+            catch (Exception r)
+            {
+                throw r;
+            }
+        }
+
+        public void PutEmployeeDetails(EmployeeDetailsModel emp)
+        {
+            try
+            {
+
+                SqlConnection con = new SqlConnection(connectionString);
+
+                con.Open();
+                con.Execute($" exec EmployeeDetailsUpdate '{emp.Name}',{emp.address},{emp.age},{emp.phonenumber},'{emp.DOB}',{emp.ID}");
+                con.Close();
+            }
+            catch (SqlException eu)
+            {
+                throw;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+        }
+
+        public void DeleteEmployeeDetails(int id)
+        {
+            try
+            {
+
+
+                SqlConnection con = new SqlConnection(connectionString);
+
+                con.Open();
+                con.Execute($"  exec EmployeeDetailsDelete { id}");
+
+                con.Close();
+
+            }
+            catch (SqlException ed)
+            {
+                throw;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
         }
 
     }

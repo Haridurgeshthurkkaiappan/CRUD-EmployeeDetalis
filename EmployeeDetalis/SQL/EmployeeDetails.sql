@@ -25,3 +25,5 @@ create or alter procedure EmployeeDetailsinsert (@Name nvarchar(500),@Address nv
    end
 
    exec EmployeeDetailsinsert 'hari','palani',21,8925520077,'08-08-2002'
+
+   

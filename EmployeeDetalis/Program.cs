@@ -7,8 +7,8 @@ namespace EmployeeDetalis
     {
         static void Main(string[] args)
         {
-            EmployeeDetailsMenu obj = new EmployeeDetailsMenu();
-            obj.doit();
+           //EmployeeDetailsMenu obj = new EmployeeDetailsMenu();
+           // obj.doit();
         }
     }
 }
