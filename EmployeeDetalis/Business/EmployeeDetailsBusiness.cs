@@ -27,9 +27,6 @@ namespace EmployeeDetalis.Business
            
             try
             {
-
-
-
                 SqlConnection con = new SqlConnection(connectionString);
 
                 con.Open();
@@ -58,12 +55,8 @@ namespace EmployeeDetalis.Business
                 connection.Open();
                 constrain = connection.Query<EmployeeDetailsModel>($" exec listEmployeeDetails {id} ").ToList();
                 connection.Close();
-                //foreach (var cons in constrain)
-                //{
 
 
-                //    Console.WriteLine($"ID-->{cons.ID}\tName-->{cons.Name}\tAddress-->{cons.address}\tAGE-->{cons.age}\tPHONENUMBER-->{cons.phonenumber}\tDOB-->{cons.DOB}");
-                //}
 
                 return constrain;
 
@@ -90,13 +83,7 @@ namespace EmployeeDetalis.Business
                 connection.Open();
                 constrain = connection.Query<EmployeeDetailsModel>(" select * from EmployeeDetails ").ToList();
                 connection.Close();
-                //foreach (var cons in constrain)
-                //{
-
-
-                //    Console.WriteLine($"ID-->{cons.ID}\tName-->{cons.Name}\tAddress-->{cons.address}\tAGE-->{cons.age}\tPHONENUMBER-->{cons.phonenumber}\tDOB-->{cons.DOB}");
-                //}
-
+                
                 return constrain;
 
 
@@ -120,7 +107,7 @@ namespace EmployeeDetalis.Business
                 SqlConnection con = new SqlConnection(connectionString);
 
                 con.Open();
-                con.Execute($" exec EmployeeDetailsUpdate '{emp.Name}',{emp.address},{emp.age},{emp.phonenumber},'{emp.DOB}',{emp.ID}");
+                con.Execute($" exec EmployeeDetailsUpdate '{emp.Name}',{emp.address},{emp.age},{emp.phonenumber},'{emp.DOB.ToString("MM-dd-yyyy")}',{emp.ID}");
                 con.Close();
             }
             catch (SqlException eu)
