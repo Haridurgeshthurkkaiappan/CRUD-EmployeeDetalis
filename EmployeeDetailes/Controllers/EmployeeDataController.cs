@@ -28,6 +28,7 @@ namespace EmployeeDetailes.Controllers
 
         // GET: EmployeeDataController/Details/5
         public ActionResult Details(int id)
+
         {
             var result = obj.ReadEmployeeDetails(id);
 
