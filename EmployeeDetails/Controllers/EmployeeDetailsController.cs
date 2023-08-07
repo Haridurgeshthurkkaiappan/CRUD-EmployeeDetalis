@@ -29,7 +29,7 @@ namespace EmployeeDetails.Controllers
         }
 
         [HttpGet("{id}")]
-        public IEnumerable<EmployeeDetailsModel> Get(int id)
+        public EmployeeDetailsModel Get(int id)
         {
             return obj.ReadEmployeeDetails(id); 
         }

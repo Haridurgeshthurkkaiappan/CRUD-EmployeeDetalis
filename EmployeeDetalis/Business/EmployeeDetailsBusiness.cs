@@ -45,20 +45,19 @@ namespace EmployeeDetalis.Business
             }
 
         }
-        public List<EmployeeDetailsModel> ReadEmployeeDetails(int id)
+        public EmployeeDetailsModel ReadEmployeeDetails(int id)
         {
             try
             {
-                List<EmployeeDetailsModel> constrain = new List<EmployeeDetailsModel>();
-
+                SqlConnection con = new SqlConnection(connectionString);
                 var connection = new SqlConnection(connectionString);
-                connection.Open();
-                constrain = connection.Query<EmployeeDetailsModel>($" exec listEmployeeDetails {id} ").ToList();
-                connection.Close();
+                con.Open();
+                var Employee = connection.QueryFirst <EmployeeDetailsModel>($" exec listEmployeeDetails {id} ");
+                con.Close();
 
 
 
-                return constrain;
+                return Employee;
 
 
             }
